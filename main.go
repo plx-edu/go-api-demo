@@ -2,28 +2,30 @@ package main
 
 import (
 	"fmt"
+	"go-api-demo/custom"
+	"go-api-demo/db"
 	"go-api-demo/routes"
+	"log"
 	"net/http"
+	"os"
+
+	"github.com/joho/godotenv"
 )
 
+// Application Entrypoint
 func main(){
-	// Simple Hello World
-	message := decorate("Greetings and Salutations", 5)
-	fmt.Println(message)
+	env := godotenv.Load()
 
-	// Using routes
-	// http.Handle("/", routes.Handler())
-
-	http.ListenAndServe(":3001", routes.Handler())
-
-}
-
-func decorate(msg string, n int) string{
-	dots := ""
-
-	for i := 0; i < n; i++ {
-		dots += ":"
+	if env  != nil {
+		log.Fatal("Error loading .env file")
 	}
-
-	return dots+" "+msg+" "+dots
+	
+	port := fmt.Sprintf(":%v", os.Getenv("PORT"))
+	
+	db.Connect()
+	db.Migrate()
+	
+	// Start server
+	custom.Show(fmt.Sprintf("Listening on port %v", port), 5)
+	log.Fatal(http.ListenAndServe(port, routes.Handler()))
 }
