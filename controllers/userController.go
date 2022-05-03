@@ -17,7 +17,7 @@ func GetUsers(w http.ResponseWriter, r *http.Request){
 	u := db.Instance.Find(&users)
 
 	if u.Error != nil {
-		log.Printf("Error ", u.Error)
+		log.Println("Error ", u.Error)
 
 		err := map[string]interface{}{"status": 502, "message": "Cannot get users"}
 		json.NewEncoder(w).Encode(err)
