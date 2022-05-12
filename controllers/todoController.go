@@ -8,10 +8,10 @@ import (
 )
 
 
-func GetPosts(w http.ResponseWriter, r *http.Request){
-	custom.Show("GetPosts()", 3)
+func GetTodos(w http.ResponseWriter, r *http.Request){
+	custom.Show("GetTodos()", 3)
 	
-	var posts []models.Post
+	var posts []models.Todo
 	// posts := models.Post{"Title", "Text Content", &models.User{ "Lunah", 20}}
 
 	json.NewEncoder(w).Encode(posts)

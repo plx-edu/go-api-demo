@@ -5,8 +5,8 @@ import "gorm.io/gorm"
 type User struct {
 	gorm.Model
 
-	Name string 
-	Age  int
-	// Name string `json "name"`
-	// Age  int    `json "age"`
+	Username	string	`gorm:"not null;default:null;uniqueIndex" json:"username"`
+	Password	string	`gorm:"not null;default:null" json:"password"`
+	Salt			string	`gorm:"not null;default:null" json:"salt"`
+	// Todo			Todo		`gorm:"constraint:OnDelete:CASCADE;"`
 }

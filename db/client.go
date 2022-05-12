@@ -26,12 +26,13 @@ func Connect() {
 	if err != nil {
 			log.Fatal("Error ", err)
 	}
-	log.Println("Connected to DB")
+	log.Println("::::: Connected to DB")
 }
 
 func Migrate() {
-	Instance.AutoMigrate(&models.User{})
-	Instance.AutoMigrate(&models.Post{})
+	Instance.AutoMigrate(models.User{})
+	Instance.AutoMigrate(models.Todo{})
+	Instance.AutoMigrate(models.Task{})
 
-	log.Println("DB Migration Completed")
+	log.Println(":::: DB Migration Completed")
 }

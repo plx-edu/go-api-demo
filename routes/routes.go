@@ -13,7 +13,7 @@ import (
 func Handler() *mux.Router{
 	// init router
 	r := mux.NewRouter().StrictSlash(true)
-	r.Use(jsonHeader) // set default Content-Type
+	r.Use(jsonHeader) // set default Content-Type to json
 
 
 
@@ -27,7 +27,7 @@ func Handler() *mux.Router{
 	// r.HandleFunc("/users/{id}", controllers.UpdateUser).Methods("PUT")
 	// r.HandleFunc("/users/{id}", controllers.DeleteUser).Methods("DELETE")
 	
-	r.HandleFunc("/posts", controllers.GetPosts).Methods("GET")
+	r.HandleFunc("/todos", controllers.GetTodos).Methods("GET")
 	// r.HandleFunc("/posts", controllers.CreatePost).Methods("POST")
 	// r.HandleFunc("/posts/{id}", controllers.GetPost).Methods("GET")
 	// r.HandleFunc("/posts/{id}", controllers.UpdatePost).Methods("PUT")
@@ -40,10 +40,10 @@ func Handler() *mux.Router{
 }
 
 
-func getHeaders(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-}
+// func getHeaders(w http.ResponseWriter, r *http.Request) {
+// 	w.Header().Set("Content-Type", "application/json")
+// 	w.Header().Set("Access-Control-Allow-Origin", "*")
+// }
 
 func jsonHeader(next http.Handler)  http.Handler{
 	return http.HandlerFunc(
