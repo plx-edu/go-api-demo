@@ -1,6 +1,10 @@
 package custom
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
 
 func Show(msg string, n int) {
 	dots := ""
@@ -11,4 +15,14 @@ func Show(msg string, n int) {
 
 	m := fmt.Sprintf("%v %v %v", dots, msg, dots)
 	fmt.Println(m)
+}
+
+func AppLog(r *http.Request){
+	log.Println("::::",r.URL, r.Method,)
+}
+
+func GenericError() map[string]interface{} {
+	return map[string]interface{}{
+		"Message": "Something went wrong",
+	}
 }

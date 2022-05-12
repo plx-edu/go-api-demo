@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"go-api-demo/custom"
 	"go-api-demo/db"
+	"go-api-demo/models"
 	"go-api-demo/routes"
 	"go-api-demo/services"
 	"log"
@@ -29,9 +29,21 @@ func main(){
 	
 	// Retrieve port number from env
 	port := fmt.Sprintf(":%v", os.Getenv("PORT"))
-	fmt.Printf("Users: %v\n",services.GetUsers())
 	
 	// Start server
-	custom.Show(fmt.Sprintf("Listening on port %v", port), 5)
+	log.Printf("::::: Listening on port %v\n", port)
 	log.Fatal(http.ListenAndServe(port, routes.Handler()))
+}
+
+func tryingOut(){
+
+	fmt.Printf("Users: %v\n",services.GetUsers())
+
+	var newUser = models.User{
+		Username: "Bihn",
+		Password: "passwd",
+		Salt: "na",
+	}
+
+	fmt.Printf("Users: %v\n",services.CreateUser(newUser))
 }
